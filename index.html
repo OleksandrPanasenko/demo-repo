@@ -7,5 +7,63 @@
 </head>
 <body>
     <div>Hello</div>
+    <input type="text" class="input_window">
+    <div class="answers">
+        
+    </div>
+    <button onclick="addNewQuestion()">Add new answer</button>
+    <button>Save question changes</button>
+
+    <div class="content">
+        <div class="question">
+            <div class="question_text">1.What is the Sun?</div>
+            <div class="question_answers">
+                <div class="question_answers_choice correct_answer">The star <input type="radio" name="qestion_button_1" class="question_radiobutton"></div>
+                <div class="question_answers_choice">Lightbuld <input type="radio" name="qestion_button_1" class="question_radiobutton" id=""></div>
+                <div class="question_answers_choice">Diety <input type="radio" name="qestion_button_1" class="question_radiobutton" id=""></div>
+                <div class="question_answers_choice">Fireball rotating around the Earth<input type="radio" name="qestion_button_1" class="question_radiobutton" id=""></div>
+            </div>
+        </div>
+        <div class="question">
+            <div class="question_text">2.What is the Earth?</div>
+            <div class="question_answers">
+                <div class="question_answers_choice">Water <input type="radio" name="qestion_button_2" class="question_radiobutton"></div>
+                <div class="question_answers_choice">Simulation <input type="radio" name="qestion_button_2" class="question_radiobutton" id=""></div>
+                <div class="question_answers_choice correct_answer">Planet <input type="radio" name="qestion_button_2" class="question_radiobutton" id=""></div>
+                <div class="question_answers_choice">Disk<input type="radio" name="qestion_button_2" class="question_radiobutton" id=""></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function Question_object(text, answers,correct){
+            this.text=text;
+            this.answers=answers;
+            this.correct_answer=correct;
+        };
+        let Question_array=[]
+        add_new_Question(text="1.What is the Sun?", answers=["The start", "Lightbulb", "Diety", "Giant fire", "Masons' base"], correct=0);
+        add_new_Question("What is the greatest country in the world?", ["USA", "China", "Andorra", "Kazakhstan"], 3);
+        refresh_questions();
+        function refresh_questions(){
+            let html="";
+            Question_array.forEach((current_question, i)=>{
+                html+='<div class="question">';
+                html+=`<div class="question_text">${current_question.text}<div class="question_answers">`;
+                current_question.answers.forEach((string, j)=>{
+                    html+=`<div class="question_answers_choice${j==current_question.correct? ' correct_answer':''}">
+                        ${current_question.answers[j]}<input type="radio" name="qestion_button_${i}" class="question_radiobutton">
+                        </div>`;
+                })
+                html+=`</div></div>`;
+            })
+            document.querySelector('content').innerHTML=html;
+        }
+        
+        function add_new_Question(text, answers, correct){
+            Question_array.append(new Question_object(text, answers, correct))
+        }
+
+
+    </script>
 </body>
 </html>
